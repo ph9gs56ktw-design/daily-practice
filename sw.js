@@ -1,18 +1,15 @@
-const CACHE_NAME = "daily-practice-v1";
+const CACHE_NAME = "daily-practice-v2";
 const APP_SHELL = [
   "./",
   "./index.html",
   "./styles.css",
   "./manifest.json",
-  "./icon-180.png",
-  "./icon-192.png",
-  "./icon-512.png"
+  "./icon.svg"
 ];
 
 self.addEventListener("install", (event) => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE_NAME);
-    // Cache files individually so one missing optional resource does not abort installation.
     await Promise.all(APP_SHELL.map(async (url) => {
       try {
         const response = await fetch(url, { cache: "reload" });
